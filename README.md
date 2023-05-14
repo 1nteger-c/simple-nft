@@ -16,8 +16,3 @@
 2. npm install
 3. npx hardhat node (recommend to run in seperate termianl)
 4. npx hardhat run scripts/deploy.js (deploy NFT contract)
-
-
-**Q.  how to call smart contract function by javascript**
-
-- please refer to `./scripts/mint.js`
