@@ -16,6 +16,18 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// Route to view the image
+app.get('/img/:imgName', (req, res) => {
+  const imageName = req.params.imgName;
+  const imagePath = path.join(__dirname, 'uploads', imageName);
+
+  res.sendFile(imagePath, (err) => {
+    if (err) {
+      res.status(404).send('File not found');
+    }
+  });
+});
+
 // Route to handle file upload
 app.post("/upload", upload.single("file"), (req, res) => {
     console.log("?")
@@ -29,7 +41,6 @@ app.post("/upload", upload.single("file"), (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify({ imageUrl: filename}));
-
 });
 // make uploads directory
 if(!fs.existsSync("./uploads")){
