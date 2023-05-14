@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0 --port 8081",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -26,6 +26,7 @@
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
     "@metamask/detect-provider": "^2.0.0",
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5.2.3",
+    "ethers": "^5.7.2"
   }
 }
