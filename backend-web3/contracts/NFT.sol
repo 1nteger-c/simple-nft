@@ -31,4 +31,9 @@ contract NFT_CS492 is ERC721URIStorage, Ownable {
     function getTokenURI(uint256 tokenId) public view returns (string memory) {
         return tokenURI(tokenId);
     }
+
+    function getTokenIds() public view returns (uint256) {
+        return _tokenIds.current();
+    }
+
 }
