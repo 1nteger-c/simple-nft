@@ -42,13 +42,14 @@ function ImageUploader({ signer, wallet }: ImageUploaderProps) {
 
       const result = await response.json();
       setImageDBUrl("http://127.0.0.1:8080/img/" + result.imageUrl)
+      alert("Image uploaded successfully")
       return result.imageUrl;
     }
   };
   const handleMintClick = async () => {
     if (imageDBUrl) {
       console.log("Image URL:", imageDBUrl);
-      const address = "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e";
+      const address = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // have to set as contract address (need to change as automatically)
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const abi = [
         "function mintNFT(address user, string memory tokenURI) public returns (uint256)",
@@ -59,8 +60,9 @@ function ImageUploader({ signer, wallet }: ImageUploaderProps) {
         throw new Error("Signer is null.");
       }
       const contract = new ethers.Contract(address, abi, signer);
-  
+      console.log("a")
       try {
+        console.log("a")
         const tx = await contract.mintNFT(wallet, imageDBUrl);
         console.log(`Transaction hash: ${tx.hash}`);
       
