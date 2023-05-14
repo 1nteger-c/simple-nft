@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
+const fs = require('fs')
 
 const app = express();
 
@@ -30,7 +31,10 @@ app.post("/upload", upload.single("file"), (req, res) => {
   res.end(JSON.stringify({ imageUrl: filename}));
 
 });
-
+// make uploads directory
+if(!fs.existsSync("./uploads")){
+  fs.mkdirSync("./uploads");
+}
 // Serve uploaded files statically
 app.use("/uploads", express.static("uploads"));
 
