@@ -1,14 +1,14 @@
 //import ListGroup from "./components/ListGroup";
 import ImageUploader from "./components/ImageUploader";
-import './App.css'
-import { useState, useEffect } from 'react'
-import detectEthereumProvider from '@metamask/detect-provider'
-import { ethers } from 'ethers';
+import "./App.css";
+import { useState, useEffect } from "react";
+import detectEthereumProvider from "@metamask/detect-provider";
+import { ethers } from "ethers";
+import logo from "../title.png";
 
 const App = () => {
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
   const [wallet, setWallet] = useState<string | null>(null);
-
 
   const handleConnect = async () => {
     try {
@@ -16,13 +16,16 @@ const App = () => {
       const provider = await detectEthereumProvider();
 
       if (!provider) {
-        console.error('Metamask not found');
+        console.error("Metamask not found");
         return;
       }
 
       // request permission to access user's accounts
-      if ((provider as any).request && (provider as any).request({ method: 'eth_accounts' })) {
-        await (provider as any).request({ method: 'eth_requestAccounts' });
+      if (
+        (provider as any).request &&
+        (provider as any).request({ method: "eth_accounts" })
+      ) {
+        await (provider as any).request({ method: "eth_requestAccounts" });
       } else {
         // if the provider doesn't have a request method, fall back to the legacy API
         await (provider as any).enable();
@@ -41,25 +44,19 @@ const App = () => {
     }
   };
 
-
   return (
     <div style={{ textAlign: "center" }}>
-      <header
-        style={{ margin: "32px auto", fontSize: "24px", fontWeight: "bold" }}
-      >
-        NFT Generator
-      </header>
+      <img src={logo} alt="Logo" style={{ width: "50%" }} />
       <ImageUploader signer={signer} wallet={wallet} />
       {wallet ? (
-          <p>Wallet address: {wallet}</p>
-        ) : (
-          window.ethereum?.isMetaMask && (
-            <button onClick={handleConnect}>Connect MetaMask</button>
-          )
-        )}
-      
+        <p>Wallet address: {wallet}</p>
+      ) : (
+        window.ethereum?.isMetaMask && (
+          <button onClick={handleConnect}>Connect MetaMask</button>
+        )
+      )}
     </div>
   );
-}
+};
 
 export default App;
