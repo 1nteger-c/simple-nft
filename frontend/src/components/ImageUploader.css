@@ -1,0 +1,74 @@
+@keyframes rainbow-border {
+    0% {
+        border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;
+      }
+      100% {
+        border-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red) 1;
+      }
+  }
+  
+  .image-uploader-container {
+    display: "flex";
+    flex-direction: "column";
+    align-items: "center";
+    background: 
+        url('./nft.png') top left no-repeat,
+        url('./nft.png') top right no-repeat,
+        url('./nft.png') bottom left no-repeat,
+        url('./nft.png') bottom right no-repeat;
+        background-repeat: no-repeat;
+        background-position:
+          top left,
+          top right,
+          bottom left,
+          bottom right;
+        background-size:
+          10% auto,
+          10% auto,
+          10% auto,
+          10% auto;
+  }
+  
+  .image-box {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 10px solid;
+    border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    border-image-slice: 1;
+    animation: rainbow-border 3s linear infinite;
+    margin: 0 auto;
+  }
+  
+  .image-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .image-uploader-container .upload-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .image-uploader-container .button-container {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .image-uploader-container .upload-buttons form {
+    /* Styles for the upload form */
+    margin-bottom: 8px;
+  }
+  
+  .image-uploader-container .upload-buttons button {
+    /* Styles for the buttons */
+    width: 80px;
+    height: 40px;
+  }
+  
