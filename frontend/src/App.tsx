@@ -55,6 +55,25 @@ const App = () => {
           <button onClick={handleConnect}>Connect MetaMask</button>
         )
       )}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          marginTop: "20px",
+        }}
+      >
+        <div style={{ textAlign: "left" }}>
+          <h2>Instructions:</h2>
+          <p style={{ marginTop: "20px" }}>1. Connect your Metmask Wallet</p>
+          <p>2. Select an image you want to mint using "select file" button</p>
+          <p>3. Upload the image using "Upload" button</p>
+          <p>
+            4. Mint the uploaded image using "Mint!" button. Now, your NFT is in
+            your wallet!
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
