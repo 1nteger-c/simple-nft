@@ -65,7 +65,10 @@ const App = () => {
       >
         <div style={{ textAlign: "left" }}>
           <h2>Instructions:</h2>
-          <p style={{ marginTop: "20px" }}>1. Connect your Metmask Wallet</p>
+          <p style={{ marginTop: "20px" }}>
+            0. Make sure you have Metamask extension installed
+          </p>
+          <p>1. Connect your Metamask Wallet</p>
           <p>2. Select an image you want to mint using "select file" button</p>
           <p>3. Upload the image using "Upload" button</p>
           <p>
