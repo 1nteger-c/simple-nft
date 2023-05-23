@@ -6,6 +6,11 @@ type ImageUploaderProps = {
   signer: ethers.Signer | null;
   wallet: string | null;
 };
+const {
+  VITE_HOST,
+  VITE_SECRET_KEY,
+  VITE_CONTRACT_ADDRESS
+} = import.meta.env
 
 function ImageUploader({ signer, wallet }: ImageUploaderProps) {
   const [imageUrl, setImageUrl] = useState("");
@@ -30,7 +35,7 @@ function ImageUploader({ signer, wallet }: ImageUploaderProps) {
       const formData = new FormData();
       formData.append("file", fileInputRef.current.files[0]);
 
-      const response = await fetch("http://localhost:8080/upload", {
+      const response = await fetch(`http://${VITE_HOST}:8080/upload`, {
         method: "POST",
         body: formData,
       });
@@ -41,7 +46,7 @@ function ImageUploader({ signer, wallet }: ImageUploaderProps) {
       }
 
       const result = await response.json();
-      setImageDBUrl("http://127.0.0.1:8080/img/" + result.imageUrl);
+      setImageDBUrl(`http://${VITE_HOST}:8080/img/` + result.imageUrl);
       alert("Image uploaded successfully");
       return result.imageUrl;
     }
@@ -49,7 +54,7 @@ function ImageUploader({ signer, wallet }: ImageUploaderProps) {
   const handleMintClick = async () => {
     if (imageDBUrl) {
       console.log("Image URL:", imageDBUrl);
-      const address = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // just for hardhat (hardhat's first contract address)
+      const address = VITE_CONTRACT_ADDRESS; // just for hardhat (hardhat's first contract address)
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const abi = [
         "function mintNFT(address user, string memory tokenURI) public returns (uint256)",
@@ -59,7 +64,7 @@ function ImageUploader({ signer, wallet }: ImageUploaderProps) {
       if (!signer) {
         throw new Error("Signer is null.");
       }
-      const contractSigner = new ethers.Wallet("0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80", provider); // just for hardhat (#0 Account)
+      const contractSigner = new ethers.Wallet(VITE_SECRET_KEY, provider); // just for hardhat (#0 Account)
       const contract = new ethers.Contract(address, abi, contractSigner);
       try {
         const tx = await contract.mintNFT(wallet, imageDBUrl);

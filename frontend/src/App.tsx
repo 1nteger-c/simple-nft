@@ -6,6 +6,10 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import logo from "../title.png";
 
+const {
+  VITE_FIREBASE_API_KEY
+} = import.meta.env
+console.log(VITE_FIREBASE_API_KEY)
 const App = () => {
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
   const [wallet, setWallet] = useState<string | null>(null);

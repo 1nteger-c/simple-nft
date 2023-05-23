@@ -30,7 +30,6 @@ app.get('/img/:imgName', (req, res) => {
 
 // Route to handle file upload
 app.post("/upload", upload.single("file"), (req, res) => {
-    console.log("?")
   if (!req.file) {
     return res.status(400).json({ message: "Error: No file uploaded" });
   }
